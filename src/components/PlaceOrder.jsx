@@ -11,7 +11,8 @@ import Subtotal from '../components/Subtotal';
 function PlaceOrder ()
 {  
     const history = useHistory();  
-    const [{basket}, dispatch] = useStateValue();
+    const [{basket,loggedInUser,customerID}, dispatch] = useStateValue();
+    const homerURL= "/LoginSuccess/?userName=" + loggedInUser+"&customerID="+customerID;  
     let imgSrc="../logo2.PNG";
 
     const tabRow = basket
@@ -19,15 +20,15 @@ function PlaceOrder ()
     return (    
     <tr key={index}> 
         <td>
-                       <div className="row">
-                            <div className="card col-sm-2 cardWidth">
-                                <img className="card-img-top rounded mx-auto d-block product__img" src={imgSrc} alt="product" />
-                            </div>
-                            <div className="card-body col-sm-10">
-                                <h5 className="card-title">{row.ProductName}</h5>
-                                <p className="card-text">{row.Description}</p>
-                            </div>
-                        </div>
+                <div className="row">
+                    <div className="card col-sm-2 cardWidth">
+                        <img className="card-img-top rounded mx-auto d-block product__img" src={imgSrc} alt="product" />
+                    </div>
+                    <div className="card-body col-sm-10">
+                        <h5 className="card-title">{row.ProductName}</h5>
+                        <p className="card-text">{row.Description}</p>
+                    </div>
+                </div>
         </td>
         <td>{row.Price}</td>                           
     </tr>
@@ -102,8 +103,13 @@ function PlaceOrder ()
                 </div>                 
             </div>
             <div>
-                 <Subtotal showButton="false" />
+                <Subtotal showButton="false" />
             </div>
+            <div>                                        
+                <Link to={homerURL}>
+                    <p>Continue Shopping</p>
+                </Link> 
+            </div> 
             <hr/>
             <div>
                 <DeliveryDetails handleSubmit={handleSubmit}/>

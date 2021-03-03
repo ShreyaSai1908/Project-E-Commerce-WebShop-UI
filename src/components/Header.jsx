@@ -11,7 +11,14 @@ import { useEffect } from 'react';
 function Header ({loggedIn})
 {         
         const history = useHistory();
-        const userName = history.location.search. substring(history.location.search. indexOf('=') + 1);
+
+        const search = history.location.search; 
+        const params = new URLSearchParams(search);
+        const userName = params.get('userName'); 
+        const customerID = params.get('customerID'); 
+
+        
+
         const [{basket,loggedInUser},dispatch]=useStateValue();  
         const productInBasket=basket?.length;   
 
@@ -32,14 +39,15 @@ function Header ({loggedIn})
         useEffect(() => {  
             dispatch({
                 type: 'SET_PRODUCT_FILTER',
-                productToFilter: null
+                productToFilter: ""
             })    
 
             if (loggedIn)
             {
                 dispatch({
                     type: 'SET_LOGIN',
-                    user: userName
+                    userName: userName,
+                    customerID: customerID
                 })
             }
           },[]);
@@ -54,7 +62,9 @@ function Header ({loggedIn})
             document.getElementById('txtProductSearch').value="";
           }  
           
-        return(            
+          console.log("loggedInUser=",loggedInUser);      
+        return(               
+
             <nav className="header">
                <img className="header__logo" src={imgSrc} alt="logo"/>
                <div className="header__search">
@@ -70,11 +80,21 @@ function Header ({loggedIn})
                            <span className="header__optionUserLine2">{txtLogLink}</span>
                         </div>
                     </Link> 
-                    <Link to="/" className="header__link">
-                        <div className="header__option">              
-                            <span className="header__optionOrders">Orders</span>
-                        </div>
-                    </Link> 
+                    {                       
+                       loggedInUser==='Admin' ? (
+                            <Link to="/AdminHome" className="header__link">
+                                <div className="header__option">              
+                                    <span className="header__optionOrders">Admin-Home</span>
+                                </div>
+                            </Link> 
+                       ):(
+                            <Link to="/Orders" className="header__link">
+                                <div className="header__option">              
+                                    <span className="header__optionOrders">Orders</span>
+                                </div>
+                            </Link> 
+                       ) 
+                    }                    
                     <Link to="/Checkout" className="header__link">
                         <div className="header__optionBasket">
                             <ShoppingBasketIcon/>

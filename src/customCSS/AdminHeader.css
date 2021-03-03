@@ -1,0 +1,97 @@
+.adminHeader {
+    background-color: black;
+    display:flex;
+    align-items: center;
+    position: sticky;
+    top:0;
+    z-index: 100;
+}
+
+.adminHeader__logo
+{
+    width: 80px;
+    margin: 0 5px;
+    margin-top: 1px;
+    object-fit: contain;
+}
+
+.adminHeader__option 
+{
+    display:flex;
+    flex-direction: column;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.adminHeader__nav
+{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.adminHeader__link
+{
+    color:white;
+    text-decoration: none;
+}
+.adminHeader__optionUserLine1
+{
+    font-size: 12px;
+    font-weight: 400;
+    margin-left: 8px;
+}
+.adminHeader__optionUserLine2
+{
+    font-size: 14px;
+    font-weight: 600;
+    margin-left: 8px;
+}
+.adminHeader__optionOrders
+{
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 8px;
+    margin-right: 8px;
+}
+.adminHeader__optionBasket
+{
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+}
+.adminHeader__productCount
+{
+    margin-left: 5px;
+    margin-right: 5px;
+    font-size: 12px;
+    font-weight:lighter;
+    margin-top: 5px;
+}
+.adminHeader__search
+{
+    display: flex;
+    flex: 1;    
+}
+.adminHeader__searchInput
+{
+    height: 12px;
+    padding: 15px;
+    border: none;
+    width: 100%;
+    font-size: 14px;
+}
+.adminHeader__searchButton
+{ 
+  float: left;
+  background: #cd904d;
+  color: white;
+  font-size: 17px;
+  border: 1px solid #a88734 #9c7e31 #846a29;
+  border-left: none; /* Prevent double borders */
+  cursor: pointer;
+
+}
+.adminHeader__searchButton:hover {
+    background: black;
+    color: #cd904d;;
+  }

@@ -5,16 +5,27 @@ import Header from './components/Header';
 import Home from './components/Home';
 import Login from './components/Login';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import {useStateValue} from './components/StateProvider';
+import { useHistory } from "react-router-dom";
 import Checkout from './components/Checkout';
 import PlaceOrder from './components/PlaceOrder';
 import Payment from './components/Payment';
 import Exit from './components/Exit';
+import OrderView from './components/OrderView';
+import AdminHome from './components/AdminHome';
+import AdminHeader from './components/AdminHeader';
+import AdminProductView from './components/AdminProductView';
+import AdminOrderView from './components/AdminOrderView';
+import AdminCreateNewProduct from './components/AdminCreateNewProduct';
+import AdminEditProduct from './components/AdminEditProduct';
+
 class App extends React.Component
 {
   state = 
   {
     loggedIn: false,
     userName: "Admin",
+    customerID: "",
     productList: [],
   }
  
@@ -37,35 +48,42 @@ class App extends React.Component
       });
   }  
 
-  handleSubmit = async (login) => 
-  {    
-      console.log(login);
+    
+  handleSubmit = async (login) =>   
+  {   
       await axios({
         method: 'post',
         url: 'https://localhost:44392/api/WebShopAPI/Login',
         data: login
       })
       .then(response => 
-      {
-        // handle success                  
-          if (response.data.length>0)
+      {       
+          // handle success  
+          if (response.status===200)
           {    
-             this.setState({userName: response.data}); 
-             this.setState({loggedIn: true}); 
-             window.location ="/LoginSuccess/?userName="+response.data  
-             //this.props.history.push("/LoginSuccess");  
-          }  
+             if (response.data.userName==="Admin")
+             {
+              this.setState({userName: response.data.userName});               
+              window.location ="/AdminHome/?userName="+response.data.userName+"&customerID="+response.data.customerID       
+             }           
+             else
+             {
+              this.setState({userName: response.data.userName});               
+              window.location ="/LoginSuccess/?userName="+response.data.userName+"&customerID="+response.data.customerID        
+             }
+                      
+          } 
                 
       })
       .catch(error => 
       {
         // handle error
-        console.log("Error", error);
+        console.log("Error while Login", "UserName/Password did not match");
       })
-      .then(() => 
+      .then((response) => 
       {
         // always executed
-        
+ 
       });    
   }; 
 
@@ -74,13 +92,17 @@ class App extends React.Component
       return (
         <Router>
             <div className="App">
-              <Switch>               
+              <Switch>                              
               <Route path="/LoginSuccess">
                     <Header loggedIn="true" userName={this.state.userName}/>
                     <Home productList={this.state.productList}/>
                 </Route>   
                 <Route path="/Login">
                     <Login handleSubmit={this.handleSubmit} />
+                </Route>               
+                <Route path="/Orders">
+                    {/*<Header userName={this.state.userName} />*/}
+                    <OrderView/>
                 </Route>
                 <Route path="/Checkout">
                     {/*<Header userName={this.state.userName} />*/}
@@ -101,14 +123,40 @@ class App extends React.Component
                 <Route path="/PaymentSuccess">
                     {/*<Header userName={this.state.userName} />*/}
                     <Exit/>
-                </Route>                
+                </Route>   
+                <Route path="/AdminHome">
+                    <AdminHeader/>
+                    <AdminHome productList={this.state.productList}/>
+                </Route>   
+                <Route path="/AdminProducts">
+                    <AdminHeader/>
+                    <br/>
+                    <AdminProductView productList={this.state.productList}/>
+                </Route>   
+                <Route path="/AdminOrders">
+                    <AdminHeader/>
+                    <br/>
+                    <AdminOrderView/>
+                </Route>   
+                <Route path="/CreateProduct">
+                    <AdminHeader/>
+                    <br/>
+                    <AdminCreateNewProduct/>
+                </Route>  
+                <Route path="/EditProduct">
+                    <AdminHeader/>
+                    <br/>
+                    <AdminEditProduct/>
+                </Route>        
                 <Route path="/">
                     <Header loggedIn={this.state.loggedIn} userName={this.state.userName}/>
                     <Home productList={this.state.productList} />
-                </Route>  
+                </Route> 
+                
               </Switch>
             </div>
         </Router>
+        
         );
   }  
   

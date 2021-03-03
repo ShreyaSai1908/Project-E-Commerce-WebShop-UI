@@ -5,13 +5,17 @@ import {useStateValue} from '../components/StateProvider';
 
 function ProductCart({productID,productName,price,desc}){
 
-    const [{basket}, dispatch] = useStateValue();
+    const [{basket,loggedInUser}, dispatch] = useStateValue();
     
     const removeItem=(event)=>{
         event.preventDefault(); 
         dispatch({
             type: 'REMOVE_FROM_CART',
             ProductID: productID
+        })
+        dispatch({
+            type: 'SET_LOGIN',
+            userName: loggedInUser
         })
     }
 

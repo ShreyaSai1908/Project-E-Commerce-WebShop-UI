@@ -1,14 +1,26 @@
-export const initialState = {
+export const initialState = { 
+    allProductList:[],   
     basket:[],
-    loggedInUser: null,
-    productToFilter: null,
+    loggedInUser: "",
+    customerID: "",
+    productToFilter: "",
     orderHeader:[],
-    delivery:[]
+    delivery:[],
+    custOrderList:[],
+    adminOrderList:[],
+    custOrderDetail:[],
+    editProduct:[],
 }
 
 const reducer = (state, action) =>{   
     switch(action.type){
         
+        case 'SET_ALL_PRODUCTS':
+            return {
+                 ...state,
+                 allProductList: action.allProductList
+        }
+
         case 'ADD_TO_BASKET':
             return {
                  ...state,
@@ -18,9 +30,34 @@ const reducer = (state, action) =>{
         case 'SET_LOGIN':
             return {
                 ...state,
-                loggedInUser: action.user
+                loggedInUser: action.userName,
+                customerID: action.customerID
             }
+
+        case 'EDIT_PRODUCT':
+            return {
+                ...state,
+                editProduct: action.editProduct
+            }    
+
+        case 'SET_ADMIN_ORDER_LIST':
+                return {
+                    ...state,
+                    adminOrderList: action.adminOrderList 
+                }       
         
+        case 'SET_CUSTORDER_LIST':
+                return {
+                    ...state,
+                    custOrderList: action.custOrderList 
+                }    
+
+        case 'SET_SUBORDER_DETAIL':
+            return {
+                ...state,
+                custOrderDetail: action.custOrderDetail 
+            }    
+
         case 'ORDER_PLACED':
             return {
                 ...state,

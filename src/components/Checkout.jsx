@@ -7,7 +7,8 @@ import { Link } from 'react-router-dom';
 
 function Checkout ()
 {    
-       const [{basket}] = useStateValue();
+       const [{basket,loggedInUser,customerID}] = useStateValue();
+       const homerURL= "/LoginSuccess/?userName=" + loggedInUser+"&customerID="+customerID; 
        return(
            <div className="checkout">
               <div className="checkout__left">
@@ -19,7 +20,7 @@ function Checkout ()
                                     <p>You have no products in your cart.</p>  
                                 </div>
                                 <div>
-                                    <Link to="/">
+                                    <Link to={homerURL}>
                                         <p>Continue Shopping</p>
                                     </Link> 
                                 </div>                                                                
@@ -41,8 +42,8 @@ function Checkout ()
                                                     )
                                         }
                                     </div>
-                                    <div>
-                                        <Link to="/">
+                                    <div>                                        
+                                        <Link to={homerURL}>
                                             <p>Continue Shopping</p>
                                         </Link> 
                                     </div>  
