@@ -38,6 +38,7 @@ function AdminEditProduct()
               if (response.status===200)
               {    
                 console.log("Product Edited");
+                history.push("/AdminProducts")
               } 
                     
           })
@@ -54,7 +55,7 @@ function AdminEditProduct()
       }
 
         return (
-            <div>
+            <div className="adminEditProduct">
                 <div class="row">
                     <div class="col-md-4">
                         <form>
@@ -71,7 +72,7 @@ function AdminEditProduct()
                                 <input class="form-control" name="Price" id="form-Price" value={Price} onChange={e => setPrice(e.target.value)}/>
                             </div>
                             <div class="form-group">
-                                <button  class="btn btn-primary" onClick={doEditProduct}>Create</button>
+                                <button  class="btn btn-primary" onClick={doEditProduct}>Edit</button>
                             </div>
                         </form>
                     </div>

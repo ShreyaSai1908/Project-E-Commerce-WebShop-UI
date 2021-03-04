@@ -10,9 +10,11 @@ import { useEffect } from 'react';
 function OrderDetailView ()
 { 
     const history = useHistory();  
-    const [{basket,loggedInUser,customerID,custOrderList,custOrderDetail}, dispatch] = useStateValue();  
+    const [{loggedInUser,customerID,custOrderList,custOrderDetail}, dispatch] = useStateValue();  
     let imgSrc="../logo2.PNG";
     
+    console.log("User->OrderdetailView->loggedInuser",loggedInUser);
+
     //const orderDetailList=Array.from(orderDetail)
     //const [{orderDetailID, orderHeader, product, productQuantity}]=Array.from(orderDetail);
     //console.log("Order detail View=",orderDetail)  

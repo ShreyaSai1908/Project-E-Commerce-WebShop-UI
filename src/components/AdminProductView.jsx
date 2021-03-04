@@ -39,7 +39,7 @@ function AdminProductView ({productList})
             // always executed     
           });    
         
-    },[]);
+    },allProductList);
 
 
     function editProduct(row)    

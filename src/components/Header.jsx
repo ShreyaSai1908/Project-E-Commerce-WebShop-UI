@@ -51,7 +51,7 @@ function Header ({loggedIn})
                 })
             }
           },[]);
-      
+                
           function searchProduct ()  {
               var productToSearch=document.getElementById('txtProductSearch').value;
               console.log("Product to Search",productToSearch)

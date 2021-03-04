@@ -10,6 +10,8 @@ export const initialState = {
     adminOrderList:[],
     custOrderDetail:[],
     editProduct:[],
+    editOrderHeader:[],
+    editOrderDetail:[],
 }
 
 const reducer = (state, action) =>{   
@@ -38,7 +40,19 @@ const reducer = (state, action) =>{
             return {
                 ...state,
                 editProduct: action.editProduct
-            }    
+            }  
+
+        case 'EDIT_ORDER_HEADER':
+            return {
+                ...state,
+                editOrderHeader: action.editOrderHeader
+            }  
+          
+        case 'EDIT_ORDER_DETAIL':
+            return {
+                ...state,
+                editOrderDetail: action.editOrderDetail
+            }      
 
         case 'SET_ADMIN_ORDER_LIST':
                 return {
@@ -52,7 +66,7 @@ const reducer = (state, action) =>{
                     custOrderList: action.custOrderList 
                 }    
 
-        case 'SET_SUBORDER_DETAIL':
+        case 'SET_CUSTORDER_DETAIL':
             return {
                 ...state,
                 custOrderDetail: action.custOrderDetail 

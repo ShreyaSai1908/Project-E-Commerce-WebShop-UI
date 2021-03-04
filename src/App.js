@@ -18,6 +18,8 @@ import AdminProductView from './components/AdminProductView';
 import AdminOrderView from './components/AdminOrderView';
 import AdminCreateNewProduct from './components/AdminCreateNewProduct';
 import AdminEditProduct from './components/AdminEditProduct';
+import AdminEditOrder from './components/AdminEditOrder';
+import AdminEditOrderDetail from './components/AdminEditOrderDetail';
 
 class App extends React.Component
 {
@@ -147,7 +149,17 @@ class App extends React.Component
                     <AdminHeader/>
                     <br/>
                     <AdminEditProduct/>
+                </Route> 
+                <Route path="/EditOrder">
+                    <AdminHeader/>
+                    <br/>
+                    <AdminEditOrder/>
                 </Route>        
+                <Route path="/EditOrderDetail">
+                    <AdminHeader/>
+                    <br/>
+                    <AdminEditOrderDetail/>
+                </Route> 
                 <Route path="/">
                     <Header loggedIn={this.state.loggedIn} userName={this.state.userName}/>
                     <Home productList={this.state.productList} />

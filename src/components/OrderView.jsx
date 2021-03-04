@@ -11,7 +11,7 @@ import OrderDetailView from '../components/OrderDetailView';
 function OrderView ()
 { 
     const history = useHistory();  
-    const [{basket,loggedInUser,customerID,custOrderList}, dispatch] = useStateValue();
+    const [{loggedInUser,customerID,custOrderList}, dispatch] = useStateValue();
     const homerURL= "/LoginSuccess/?userName=" + loggedInUser+"&customerID="+customerID;  
     
     useEffect(() =>     
